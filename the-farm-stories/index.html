@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Farm Stories — Mango Meadows, Peelamadu</title>
+<meta name="description" content="A boutique managed orchard of 25 families on 24 acres of thirty-year-old mango land in Peelamadu, Coimbatore. Own the orchard, not the workload.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F4EFE6; --warm-white:#FBF8F2; --off-white:#EFEAE0;
+  --border:#DED3C4; --muted:#8C7E6C; --earth:#7A6244; --dark-earth:#3A2E22;
+  --charcoal:#241D14; --canopy:#1F2B1E; --canopy-2:#162015;
+  --gold:#C9973A; --gold-light:#E4C079; --gold-dim:rgba(201,151,58,0.12);
+  --sage:#6B8C6A; --sage-dark:#4A6449; --sage-light:#E7EDE4;
+  --sunset:#E8A24C; --sunset-deep:#B8632E;
+  --maxw:1180px;
+  --ease-lux:cubic-bezier(.19,1,.22,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:auto;}
+html.lenis,html.lenis body{height:auto;}
+.lenis.lenis-smooth{scroll-behavior:auto!important;}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain;}
+.lenis.lenis-stopped{overflow:hidden;}
+body{
+  background:var(--cream);color:var(--charcoal);
+  font-family:'Outfit',sans-serif;font-weight:300;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+.serif{font-family:'Libre Baskerville',serif;}
+em{font-style:italic;}
+::selection{background:var(--gold-light);color:var(--charcoal);}
+
+/* ══════════ ATMOSPHERE — global fixed layers ══════════ */
+#particle-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60;opacity:.9;}
+.lightrays{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity 1.2s ease;mix-blend-mode:screen;
+  background:
+    linear-gradient(107deg,transparent 30%,rgba(228,192,121,.10) 42%,transparent 55%),
+    linear-gradient(120deg,transparent 55%,rgba(232,162,76,.08) 66%,transparent 74%);
+  background-size:200% 200%;animation:rayDrift 22s ease-in-out infinite alternate;}
+.lightrays.on{opacity:1;}
+@keyframes rayDrift{from{background-position:0% 0%;}to{background-position:100% 40%;}}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:61;opacity:.035;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ══════════ NAV ══════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(244,239,230,.72);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid transparent;
+  transition:background .5s ease,border-color .5s ease,transform .5s var(--ease-lux);
+}
+.nav.scrolled{background:rgba(244,239,230,.9);border-bottom-color:var(--border);}
+.nav.hero-mode{background:rgba(22,32,21,.14);}
+.nav.hero-mode .logo,.nav.hero-mode .logo small,.nav.hero-mode .tab{color:rgba(251,248,242,.86);}
+.nav.hero-mode .logo .amp{color:var(--gold-light);}
+.nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:30px;height:74px;}
+.logo{display:flex;align-items:baseline;gap:10px;font-family:'Libre Baskerville',serif;font-size:19px;color:var(--dark-earth);letter-spacing:-.01em;flex-shrink:0;transition:color .5s;cursor:pointer;}
+.logo .amp{color:var(--gold);font-size:24px;transition:color .5s;}
+.logo small{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-family:'Outfit';align-self:center;transition:color .5s;}
+.tabs{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap;}
+.tab{font-size:12.5px;letter-spacing:.02em;color:var(--muted);padding:9px 14px;border-radius:2px;cursor:pointer;transition:.25s;white-space:nowrap;font-weight:400;position:relative;}
+.tab:hover{color:var(--dark-earth);}
+.nav.hero-mode .tab:hover{color:#fff;}
+.tab::after{content:"";position:absolute;left:14px;right:14px;bottom:4px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease-lux);}
+.tab.active::after{transform:scaleX(1);}
+.tab.active{color:var(--canopy);}
+.nav.hero-mode .tab.active{color:#fff;}
+.nav-cta{font-size:12px;letter-spacing:.06em;text-transform:uppercase;background:var(--canopy);color:var(--cream);padding:11px 18px;border-radius:2px;font-weight:400;transition:.3s var(--ease-lux);flex-shrink:0;}
+.nav-cta:hover{background:var(--gold);color:var(--charcoal);transform:translateY(-1px);}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--border);border-radius:2px;padding:8px 12px;font-size:12px;cursor:pointer;color:var(--dark-earth);}
+
+/* ══════════ PAGE SYSTEM ══════════ */
+.page{display:none;}
+.page.active{display:block;}
+.page:not(#page-home){padding-top:74px;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:500;}
+.eyebrow.sage{color:var(--sage-dark);}
+h2.section-title{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(26px,3.4vw,36px);color:var(--dark-earth);line-height:1.16;letter-spacing:-.01em;margin-bottom:18px;}
+.lead{font-size:16px;color:var(--earth);max-width:620px;line-height:1.75;}
+
+/* ══════════ REVEAL UTILITIES ══════════ */
+[data-reveal]{opacity:0;transform:translateY(42px);filter:blur(12px);
+  transition:opacity 1.15s var(--ease-lux),transform 1.15s var(--ease-lux),filter 1.15s var(--ease-lux);will-change:opacity,transform,filter;}
+[data-reveal].in{opacity:1;transform:none;filter:blur(0);}
+[data-reveal="left"]{transform:translateX(-46px);}
+[data-reveal="right"]{transform:translateX(46px);}
+[data-reveal="scale"]{transform:scale(.9);}
+.reveal-img{overflow:hidden;position:relative;}
+.reveal-img img{transform:scale(1.18);filter:blur(16px) saturate(.9);opacity:0;
+  transition:transform 1.4s var(--ease-lux),filter 1.4s var(--ease-lux),opacity 1.2s ease;will-change:transform,filter;}
+.reveal-img.in img{transform:scale(1);filter:blur(0) saturate(1.02);opacity:1;}
+.parallax{will-change:transform;}
+
+/* ══════════ HERO (fullscreen cinematic) ══════════ */
+.hero-cine{position:relative;height:100svh;min-height:640px;overflow:hidden;background:var(--canopy-2);display:flex;align-items:flex-end;}
+.hero-media{position:absolute;inset:0;overflow:hidden;}
+.hero-media .kb{position:absolute;inset:-8%;background-size:cover;background-position:center;
+  background-image:url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80");
+  animation:kenburns 26s ease-in-out infinite alternate;filter:saturate(1.02) brightness(.92);}
+@keyframes kenburns{from{transform:scale(1.02) translate3d(0,0,0);}to{transform:scale(1.16) translate3d(-2%,-2%,0);}}
+.hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.6s ease;}
+.hero-media video.ready{opacity:1;}
+.hero-mist{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 50% 8%,rgba(251,248,242,.20),transparent 46%),
+    linear-gradient(180deg,rgba(22,32,21,.42) 0%,transparent 26%,transparent 40%,rgba(22,32,21,.30) 66%,rgba(22,32,21,.86) 100%);}
+.hero-mist::after{content:"";position:absolute;inset:0;opacity:.5;mix-blend-mode:screen;
+  background:radial-gradient(60% 40% at 30% 30%,rgba(228,192,121,.14),transparent 70%);
+  animation:mistFloat 30s ease-in-out infinite alternate;}
+@keyframes mistFloat{from{transform:translate3d(-4%,0,0) scale(1.1);}to{transform:translate3d(6%,-3%,0) scale(1.25);}}
+.hero-inner{position:relative;z-index:5;max-width:var(--maxw);margin:0 auto;width:100%;padding:0 32px 8vh;}
+.hero-eyebrow{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:26px;display:flex;align-items:center;gap:14px;}
+.hero-eyebrow::before{content:"";width:38px;height:1px;background:var(--gold-light);opacity:.7;}
+.hero-cine h1{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(38px,6.2vw,80px);line-height:1.04;color:#FBF8F2;letter-spacing:-.02em;max-width:15ch;text-shadow:0 2px 40px rgba(0,0,0,.35);}
+.hero-cine h1 em{color:var(--gold-light);}
+.hero-cine .hero-sub{font-size:clamp(15px,1.5vw,18px);color:rgba(251,248,242,.82);max-width:52ch;margin-top:28px;line-height:1.72;font-weight:300;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px;}
+.btn{font-size:13px;letter-spacing:.04em;padding:15px 28px;border-radius:2px;cursor:pointer;transition:.35s var(--ease-lux);font-weight:400;border:1px solid transparent;display:inline-block;}
+.btn-primary{background:var(--gold);color:var(--charcoal);}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 12px 30px rgba(201,151,58,.3);}
+.btn-ghost{background:rgba(255,255,255,.06);border-color:rgba(251,248,242,.5);color:#FBF8F2;backdrop-filter:blur(4px);}
+.btn-ghost:hover{background:rgba(251,248,242,.92);color:var(--canopy);}
+.hero-scroll{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:9px;color:rgba(251,248,242,.7);font-size:10px;letter-spacing:.24em;text-transform:uppercase;}
+.hero-scroll .line{width:1px;height:44px;background:linear-gradient(var(--gold-light),transparent);position:relative;overflow:hidden;}
+.hero-scroll .line::after{content:"";position:absolute;top:-40%;left:0;width:100%;height:40%;background:var(--gold-light);animation:scrollPulse 2.2s var(--ease-lux) infinite;}
+@keyframes scrollPulse{0%{top:-40%;}70%,100%{top:120%;}}
+.word{display:inline-block;overflow:hidden;vertical-align:top;}
+.word > span{display:inline-block;transform:translateY(110%);}
+
+/* dark band base */
+.band{padding:clamp(72px,10vh,132px) 0;position:relative;}
+.band.tight{padding:clamp(56px,7vh,88px) 0;}
+.band.dark{background:var(--canopy);color:var(--cream);}
+.band.cream2{background:var(--off-white);}
+.band.dark h2.section-title{color:var(--gold-light);}
+.band.dark .lead,.band.dark p{color:rgba(240,232,216,.74);}
+.band.dark .eyebrow{color:var(--gold-light);}
+
+/* ══════════ MANIFESTO ══════════ */
+.manifesto{text-align:center;max-width:900px;margin:0 auto;}
+.manifesto p{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,3.6vw,42px);line-height:1.35;color:var(--dark-earth);letter-spacing:.005em;}
+.manifesto p em{color:var(--sage-dark);}
+.manifesto .m-word{display:inline-block;opacity:.18;transition:opacity .5s ease;}
+.manifesto .m-word.lit{opacity:1;}
+
+/* ══════════ PROCESS STEPS ══════════ */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:8px;}
+.step{background:var(--warm-white);padding:34px 26px;transition:background .4s,transform .4s var(--ease-lux);}
+.step:hover{background:var(--cream);transform:translateY(-4px);}
+.step .num{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);line-height:1;margin-bottom:14px;}
+.step h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:16px;color:var(--dark-earth);margin-bottom:8px;}
+.step p{font-size:13px;color:var(--muted);line-height:1.58;}
+
+/* ══════════ 3D MINIATURE ORCHARD ══════════ */
+.orchard3d{position:relative;height:320vh;background:linear-gradient(180deg,var(--canopy-2),var(--canopy) 40%,var(--canopy-2));}
+.orchard3d .sticky{position:sticky;top:0;height:100svh;overflow:hidden;}
+#orchard-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.orchard3d .o-vignette{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 40%,transparent 45%,rgba(11,15,10,.6) 100%);}
+.orchard-cap{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:0 32px 9vh;pointer-events:none;}
+.orchard-cap .cap-inner{max-width:var(--maxw);margin:0 auto;}
+.orchard-cap .o-eyebrow{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;}
+.o-stage{position:relative;height:2.6em;}
+.o-line{position:absolute;left:0;font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(22px,3.2vw,38px);color:#FBF8F2;line-height:1.2;opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease-lux),transform .7s var(--ease-lux);max-width:20ch;}
+.o-line.show{opacity:1;transform:none;}
+.o-progress{position:absolute;left:32px;right:32px;bottom:5vh;height:1px;background:rgba(251,248,242,.16);z-index:6;}
+.o-progress .bar{position:absolute;left:0;top:0;height:100%;width:0;background:var(--gold-light);}
+.webgl-fallback{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.7) saturate(1.05);
+  background-image:url("https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1800&q=80");}
+
+/* ══════════ ANTI-PITCH ══════════ */
+.anti{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.anti-list{display:flex;flex-direction:column;gap:2px;}
+.anti-row{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(228,192,121,.18);overflow:hidden;}
+.anti-row > div{padding:20px 22px;}
+.anti-row .bad{background:rgba(0,0,0,.2);border-right:1px solid rgba(228,192,121,.12);}
+.anti-row .bad .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#C98B6A;margin-bottom:6px;}
+.anti-row .good .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px;}
+.anti-row .v{font-size:13.5px;line-height:1.5;color:rgba(240,232,216,.86);}
+
+/* ══════════ TEASER ══════════ */
+.teaser{display:grid;grid-template-columns:1fr 1fr;background:var(--warm-white);border:1px solid var(--border);border-radius:3px;overflow:hidden;}
+.teaser .t-img{position:relative;overflow:hidden;min-height:400px;}
+.teaser .t-img img{height:100%;width:100%;object-fit:cover;}
+.teaser .t-body{padding:clamp(36px,5vw,56px);display:flex;flex-direction:column;justify-content:center;}
+.teaser .t-body .eyebrow{margin-bottom:14px;}
+.teaser h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(22px,2.6vw,28px);color:var(--dark-earth);margin-bottom:16px;line-height:1.2;}
+.teaser p{font-size:14.5px;color:var(--earth);line-height:1.7;margin-bottom:26px;}
+.spec-mini{display:flex;gap:30px;margin-bottom:28px;flex-wrap:wrap;}
+.spec-mini div .n{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);line-height:1;}
+.spec-mini div .l{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+/* ══════════ AERIAL PLOTS (glowing boundaries) ══════════ */
+.aerial{position:relative;border-radius:4px;overflow:hidden;background:var(--canopy-2);aspect-ratio:16/9;box-shadow:0 40px 90px -40px rgba(22,32,21,.6);}
+.aerial img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62;filter:saturate(1.1);}
+.aerial .a-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,32,21,.15),rgba(22,32,21,.55));}
+.aerial svg{position:absolute;inset:0;width:100%;height:100%;}
+.aerial .plot-shape{fill:rgba(107,140,106,.14);stroke:var(--gold-light);stroke-width:.9;
+  stroke-dasharray:var(--len);stroke-dashoffset:var(--len);filter:drop-shadow(0 0 6px rgba(228,192,121,.5));
+  transition:stroke-dashoffset 1.6s var(--ease-lux),fill .5s;}
+.aerial.in .plot-shape{stroke-dashoffset:0;}
+.aerial .plot-shape:hover{fill:rgba(228,192,121,.28);}
+.aerial .a-label{position:absolute;color:#FBF8F2;font-family:'Cormorant Garamond',serif;font-size:15px;opacity:0;transition:opacity .5s ease;transform:translate(-50%,-50%);pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.6);}
+.aerial.in .a-label{opacity:.9;}
+.aerial .a-badge{position:absolute;left:22px;bottom:20px;background:rgba(22,32,21,.6);backdrop-filter:blur(6px);color:var(--cream);font-size:11.5px;letter-spacing:.05em;padding:9px 15px;border-radius:2px;border:1px solid rgba(228,192,121,.25);z-index:3;}
+
+/* ══════════ DOC CARDS (unfold) ══════════ */
+.docfan{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;perspective:1400px;}
+.docard{background:var(--warm-white);border:1px solid var(--border);border-radius:4px;padding:26px 20px;text-align:center;
+  transform-origin:top center;transform:rotateX(-72deg) translateY(24px);opacity:0;box-shadow:0 2px 4px rgba(58,46,34,.04);
+  transition:transform 1s var(--ease-lux),opacity .8s ease,box-shadow .4s;}
+.docfan.in .docard{transform:rotateX(0) translateY(0);opacity:1;box-shadow:0 20px 40px -22px rgba(58,46,34,.4);}
+.docard:hover{box-shadow:0 26px 50px -20px rgba(58,46,34,.5);transform:translateY(-5px);}
+.docard .di{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);margin-bottom:12px;font-weight:500;}
+.docard h5{font-size:13px;color:var(--dark-earth);font-weight:500;margin-bottom:5px;}
+.docard p{font-size:11px;color:var(--muted);line-height:1.45;}
+
+/* ══════════ OWNER DASHBOARD (assembles) ══════════ */
+.dash{border:1px solid var(--border);border-radius:5px;overflow:hidden;background:var(--warm-white);box-shadow:0 30px 70px -40px rgba(58,46,34,.5);}
+.dash-top{display:flex;align-items:center;gap:10px;padding:15px 22px;background:var(--canopy);color:var(--cream);}
+.dash-top .dot{width:9px;height:9px;border-radius:50%;background:rgba(228,192,121,.5);}
+.dash-top span{font-size:12.5px;letter-spacing:.04em;margin-left:6px;}
+.dash-top .owner{margin-left:auto;font-size:11.5px;color:rgba(240,232,216,.65);}
+.dash-body{display:grid;grid-template-columns:1.3fr 1fr;gap:1px;background:var(--border);}
+.dash-cell{background:var(--warm-white);padding:26px;}
+.dash-cell .ct{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.dash-photo{border-radius:3px;overflow:hidden;height:190px;margin-bottom:12px;}
+.dash-photo img{width:100%;height:100%;object-fit:cover;}
+.dash-cap{font-size:12px;color:var(--muted);line-height:1.55;}
+.log-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px dashed var(--border);font-size:13px;align-items:baseline;}
+.log-row:last-child{border:none;}
+.log-row .ld{color:var(--gold);min-width:34px;font-family:'Cormorant Garamond',serif;font-size:17px;}
+.log-row .lt{color:var(--earth);}
+.metric-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed var(--border);font-size:13px;}
+.metric-row:last-child{border:none;}
+.metric-row .mk{color:var(--muted);}
+.metric-row .mv{color:var(--sage-dark);font-weight:500;}
+.assemble{opacity:0;transform:translateY(30px) scale(.98);transition:opacity .8s var(--ease-lux),transform .9s var(--ease-lux);}
+.assemble.in{opacity:1;transform:none;}
+
+/* ══════════ SUNSET FINALE ══════════ */
+.sunset{position:relative;height:220vh;background:var(--canopy-2);}
+.sunset .sticky{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.sunset .sky{position:absolute;inset:0;background:linear-gradient(180deg,#2a2418,#3a2e22 40%,#6b3f24 70%,#b8632e 100%);}
+.sunset .sun{position:absolute;left:50%;top:64%;width:min(46vw,420px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,var(--gold-light) 0%,var(--sunset) 40%,rgba(184,99,46,.4) 62%,transparent 72%);
+  filter:blur(6px);will-change:transform;}
+.sunset .ridge{position:absolute;left:0;right:0;bottom:0;height:42%;background-size:cover;background-position:center top;
+  background-image:url("https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=2000&q=80");
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%);mask-image:linear-gradient(180deg,transparent,#000 30%);
+  filter:brightness(.25) sepia(.4) hue-rotate(-8deg);will-change:transform;}
+.sunset .haze{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(184,99,46,.28));mix-blend-mode:screen;}
+.sunset-copy{position:relative;z-index:5;text-align:center;padding:0 32px;color:#FBF8F2;will-change:transform,opacity;}
+.sunset-copy .eyebrow{color:var(--gold-light);}
+.sunset-copy h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(30px,5vw,60px);line-height:1.1;margin-bottom:20px;text-shadow:0 2px 30px rgba(0,0,0,.4);}
+.sunset-copy h2 em{color:var(--gold-light);}
+.sunset-copy p{font-size:16px;color:rgba(251,248,242,.82);max-width:480px;margin:0 auto 30px;}
+
+/* ══════════ CTA STRIP ══════════ */
+.cta-strip{text-align:center;padding:clamp(64px,9vh,100px) 0;}
+.cta-strip h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(26px,3.6vw,36px);color:var(--dark-earth);line-height:1.2;margin-bottom:18px;}
+.cta-strip h2 em{color:var(--sage-dark);}
+.cta-strip p{font-size:15px;color:var(--earth);max-width:520px;margin:0 auto 32px;}
+
+/* ══════════ GENERIC PAGE INTRO ══════════ */
+.page-intro{padding:clamp(56px,9vh,96px) 0 44px;border-bottom:1px solid var(--border);}
+.page-intro .crumb{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px;}
+.page-intro .crumb b{color:var(--gold);}
+.page-intro h1{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(30px,4.6vw,50px);color:var(--dark-earth);line-height:1.1;letter-spacing:-.015em;margin-bottom:18px;}
+.page-intro h1 em{color:var(--sage-dark);}
+.page-intro p{font-size:16px;color:var(--earth);max-width:640px;line-height:1.7;}
+.divider-note{font-size:12.5px;color:var(--muted);font-style:italic;text-align:center;padding:34px 0;}
+
+/* specband */
+.specband{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.specband .cell{background:var(--warm-white);padding:30px 20px;text-align:center;}
+.specband .cell .n{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);line-height:1;}
+.specband .cell .l{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px;line-height:1.4;}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;}
+.gal figure{position:relative;overflow:hidden;border-radius:3px;background:var(--off-white);}
+.gal figure img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-lux);}
+.gal figure:hover img{transform:scale(1.06);}
+.gal figcaption{position:absolute;left:14px;bottom:14px;font-size:11px;letter-spacing:.03em;color:#fff;background:rgba(22,32,21,.62);padding:6px 11px;border-radius:2px;backdrop-filter:blur(4px);}
+.g-tall{grid-column:span 5;grid-row:span 2;min-height:480px;}
+.g-wide{grid-column:span 7;min-height:233px;}
+.g-third{grid-column:span 4;min-height:240px;}
+
+/* own list */
+.own{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.own .item{background:var(--warm-white);padding:30px 26px;transition:background .35s;}
+.own .item:hover{background:var(--cream);}
+.own .item .ic{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);margin-bottom:10px;}
+.own .item h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:16px;color:var(--dark-earth);margin-bottom:7px;}
+.own .item p{font-size:13px;color:var(--muted);line-height:1.55;}
+
+/* ══════════ PLOTS AGGREGATOR (MagicBricks-style) ══════════ */
+.agg-bar{position:sticky;top:74px;z-index:40;background:rgba(251,248,242,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:4px;padding:16px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:22px;box-shadow:0 8px 24px -14px rgba(58,46,34,.25);}
+.agg-search{flex:1;min-width:220px;position:relative;display:flex;align-items:center;}
+.agg-search svg{position:absolute;left:13px;width:16px;height:16px;stroke:var(--muted);}
+.agg-search input{width:100%;padding:12px 14px 12px 38px;border:1px solid var(--border);border-radius:3px;background:var(--warm-white);font-family:'Outfit';font-size:13.5px;color:var(--charcoal);transition:border-color .25s;}
+.agg-search input:focus{outline:none;border-color:var(--gold);}
+.agg-sort{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);}
+.agg-sort select{padding:11px 14px;border:1px solid var(--border);border-radius:3px;background:var(--warm-white);font-family:'Outfit';font-size:13px;color:var(--dark-earth);cursor:pointer;}
+.agg-view{display:flex;border:1px solid var(--border);border-radius:3px;overflow:hidden;}
+.agg-view button{padding:11px 15px;background:var(--warm-white);border:none;font-family:'Outfit';font-size:12px;color:var(--muted);cursor:pointer;transition:.2s;letter-spacing:.03em;}
+.agg-view button.active{background:var(--canopy);color:var(--cream);}
+.agg-layout{display:grid;grid-template-columns:280px 1fr;gap:22px;align-items:start;}
+.agg-filters{position:sticky;top:150px;background:var(--warm-white);border:1px solid var(--border);border-radius:4px;padding:24px 22px;}
+.agg-filters h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:17px;color:var(--dark-earth);margin-bottom:4px;}
+.agg-filters .sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+.ctrl-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:20px 0 10px;}
+.filter-row{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{font-size:11.5px;padding:8px 13px;border:1px solid var(--border);border-radius:20px;cursor:pointer;background:var(--warm-white);color:var(--earth);transition:.2s var(--ease-lux);}
+.chip:hover{border-color:var(--gold);transform:translateY(-1px);}
+.chip.active{background:var(--canopy);color:var(--cream);border-color:var(--canopy);}
+.legend-box{margin-top:24px;padding-top:20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:9px;}
+.legend-box .lr{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--earth);}
+.legend-box .sw{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+.agg-count{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.agg-count b{color:var(--sage-dark);font-weight:600;}
+.agg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;}
+.agg-grid.list-mode{grid-template-columns:1fr;}
+.pcard{background:var(--warm-white);border:1px solid var(--border);border-radius:5px;overflow:hidden;cursor:pointer;transition:transform .4s var(--ease-lux),box-shadow .4s,border-color .3s;display:flex;flex-direction:column;}
+.pcard:hover{transform:translateY(-5px);box-shadow:0 22px 46px -24px rgba(58,46,34,.42);border-color:var(--gold);}
+.pcard.hidden{display:none;}
+.pcard.list-mode{flex-direction:row;}
+.pcard .pc-img{position:relative;height:160px;overflow:hidden;background:var(--off-white);flex-shrink:0;}
+.pcard.list-mode .pc-img{width:240px;height:auto;min-height:180px;}
+.pcard .pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-lux);}
+.pcard:hover .pc-img img{transform:scale(1.07);}
+.pc-status{position:absolute;top:11px;left:11px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:20px;backdrop-filter:blur(4px);font-weight:500;}
+.pc-status.available{background:rgba(107,140,106,.9);color:#fff;}
+.pc-status.reserved{background:rgba(201,151,58,.92);color:#fff;}
+.pc-status.sold{background:rgba(140,126,108,.9);color:#fff;}
+.pc-fav{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;background:rgba(251,248,242,.85);display:flex;align-items:center;justify-content:center;transition:.25s;}
+.pc-fav svg{width:15px;height:15px;stroke:var(--earth);fill:none;transition:.25s;}
+.pc-fav.on svg,.pc-fav:hover svg{fill:var(--gold);stroke:var(--gold);}
+.pc-body{padding:18px 18px 20px;display:flex;flex-direction:column;flex:1;}
+.pc-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;}
+.pc-num{font-family:'Libre Baskerville',serif;font-size:18px;color:var(--dark-earth);}
+.pc-price{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);line-height:1;}
+.pc-view{font-size:12px;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:6px;}
+.pc-view svg{width:13px;height:13px;stroke:var(--sage-dark);}
+.pc-specs{display:flex;gap:16px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:14px;}
+.pc-specs div{font-size:12px;}
+.pc-specs .sl{color:var(--muted);font-size:10px;letter-spacing:.06em;text-transform:uppercase;}
+.pc-specs .sv{color:var(--dark-earth);font-weight:500;margin-top:2px;}
+.pc-actions{display:flex;gap:8px;margin-top:auto;}
+.pc-actions button{flex:1;padding:10px;border-radius:3px;font-family:'Outfit';font-size:12px;cursor:pointer;transition:.25s;border:1px solid var(--border);letter-spacing:.02em;}
+.pc-actions .enquire{background:var(--canopy);color:var(--cream);border-color:var(--canopy);}
+.pc-actions .enquire:hover{background:var(--gold);color:var(--charcoal);border-color:var(--gold);}
+.pc-actions .details{background:transparent;color:var(--earth);}
+.pc-actions .details:hover{border-color:var(--gold);color:var(--dark-earth);}
+.pc-actions button:disabled{opacity:.45;cursor:not-allowed;}
+.agg-empty{grid-column:1/-1;padding:60px;text-align:center;color:var(--muted);font-size:14px;display:none;}
+
+/* aerial toggle map for aggregator */
+.agg-map{display:none;}
+.agg-map.show{display:block;}
+.agg-grid.hide{display:none;}
+
+/* modal */
+.pmodal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;}
+.pmodal.open{display:flex;}
+.pmodal .scrim{position:absolute;inset:0;background:rgba(22,32,21,.55);backdrop-filter:blur(4px);opacity:0;transition:opacity .4s;}
+.pmodal.open .scrim{opacity:1;}
+.pmodal .sheet{position:relative;z-index:2;width:min(720px,100%);max-height:88vh;overflow:auto;background:var(--warm-white);border-radius:6px;box-shadow:0 40px 100px -30px rgba(0,0,0,.5);transform:translateY(24px) scale(.97);opacity:0;transition:transform .5s var(--ease-lux),opacity .4s;}
+.pmodal.open .sheet{transform:none;opacity:1;}
+.sheet-img{position:relative;height:240px;overflow:hidden;}
+.sheet-img img{width:100%;height:100%;object-fit:cover;}
+.sheet-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;background:rgba(251,248,242,.9);border:none;font-size:18px;cursor:pointer;color:var(--dark-earth);display:flex;align-items:center;justify-content:center;transition:.2s;}
+.sheet-close:hover{background:#fff;transform:rotate(90deg);}
+.sheet-body{padding:30px 34px 34px;}
+.sheet-body .s-num{font-family:'Libre Baskerville',serif;font-size:26px;color:var(--dark-earth);margin-bottom:6px;}
+.sheet-body .s-loc{font-size:13px;color:var(--muted);margin-bottom:22px;}
+.sheet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px;}
+.sheet-grid div .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.sheet-grid div .v{font-size:15px;color:var(--dark-earth);font-weight:500;}
+.sheet-grid div .v.gold{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:24px;}
+.sheet-feats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px;}
+.sheet-feats span{font-size:11.5px;color:var(--sage-dark);background:var(--sage-light);padding:6px 13px;border-radius:20px;}
+.sheet-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.sheet-actions .btn{flex:1;text-align:center;min-width:160px;}
+
+/* proof */
+.proofstack{display:flex;flex-direction:column;gap:14px;}
+.proof-item{display:grid;grid-template-columns:54px 1fr auto;gap:20px;align-items:center;background:var(--warm-white);border:1px solid var(--border);border-left:3px solid var(--sage);border-radius:3px;padding:24px 26px;transition:transform .35s var(--ease-lux),box-shadow .35s;}
+.proof-item:hover{transform:translateX(4px);box-shadow:0 14px 30px -20px rgba(58,46,34,.4);}
+.proof-item .pi-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);line-height:1;}
+.proof-item h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:17px;color:var(--dark-earth);margin-bottom:5px;}
+.proof-item p{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:560px;}
+.proof-item .pi-check{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage-dark);background:var(--sage-light);padding:6px 13px;border-radius:2px;white-space:nowrap;}
+.fmgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fm{background:var(--warm-white);border:1px solid var(--border);border-radius:3px;padding:24px;}
+.fm .fbad{font-size:12.5px;color:#A8603F;margin-bottom:10px;display:flex;gap:9px;align-items:baseline;}
+.fm .fbad b{font-size:10px;letter-spacing:.1em;text-transform:uppercase;}
+.fm .fgood{font-size:13.5px;color:var(--dark-earth);line-height:1.55;display:flex;gap:9px;align-items:baseline;}
+.fm .fgood b{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-dark);}
+
+/* story */
+.concept{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+.concept .c-img{border-radius:4px;overflow:hidden;min-height:360px;box-shadow:0 30px 60px -34px rgba(58,46,34,.5);}
+.concept .c-img img{width:100%;height:100%;object-fit:cover;}
+.concept h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(22px,2.6vw,27px);color:var(--dark-earth);margin-bottom:16px;line-height:1.24;}
+.concept p{font-size:14.5px;color:var(--earth);line-height:1.74;margin-bottom:14px;}
+.concept .ctag{display:inline-block;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage-dark);background:var(--sage-light);padding:6px 13px;border-radius:20px;margin-bottom:18px;}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+.pillar{background:var(--warm-white);padding:38px 30px;}
+.pillar .pn{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);margin-bottom:14px;}
+.pillar h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:18px;color:var(--dark-earth);margin-bottom:10px;}
+.pillar p{font-size:13.5px;color:var(--muted);line-height:1.6;}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.member .m-img{border-radius:4px;overflow:hidden;height:320px;margin-bottom:18px;background:var(--off-white);}
+.member .m-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15);transition:filter .5s,transform .7s var(--ease-lux);}
+.member:hover .m-img img{filter:grayscale(0);transform:scale(1.04);}
+.member h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:17px;color:var(--dark-earth);}
+.member .role{font-size:12px;letter-spacing:.04em;color:var(--gold);margin:3px 0 8px;}
+.member p{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* journal */
+.timeline{position:relative;padding-left:32px;border-left:2px solid var(--border);display:flex;flex-direction:column;gap:34px;}
+.tl-item{position:relative;}
+.tl-item::before{content:"";position:absolute;left:-40px;top:4px;width:13px;height:13px;border-radius:50%;background:var(--gold);border:3px solid var(--cream);box-shadow:0 0 0 1px var(--border);}
+.tl-item .tl-date{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.tl-item h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:18px;color:var(--dark-earth);margin-bottom:6px;}
+.tl-item p{font-size:13.5px;color:var(--muted);line-height:1.6;max-width:560px;}
+.tl-item .pct{font-size:12px;color:var(--sage-dark);margin-top:6px;}
+.stories{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.story{background:var(--warm-white);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:.4s var(--ease-lux);}
+.story:hover{transform:translateY(-5px);box-shadow:0 20px 40px -22px rgba(58,46,34,.4);}
+.story .s-img{height:210px;overflow:hidden;}
+.story .s-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-lux);}
+.story:hover .s-img img{transform:scale(1.06);}
+.story .s-body{padding:24px 26px;}
+.story .s-cat{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.story h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:18px;color:var(--dark-earth);margin-bottom:8px;line-height:1.3;}
+.story p{font-size:13px;color:var(--muted);line-height:1.55;}
+.signup{display:grid;grid-template-columns:1fr 1fr;background:var(--canopy);border-radius:5px;overflow:hidden;}
+.signup .su-body{padding:clamp(38px,5vw,56px);color:var(--cream);}
+.signup .su-body h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:clamp(22px,2.6vw,27px);color:var(--gold-light);margin-bottom:14px;line-height:1.2;}
+.signup .su-body p{font-size:14.5px;color:rgba(240,232,216,.74);line-height:1.7;margin-bottom:26px;}
+.su-form{display:flex;gap:10px;flex-wrap:wrap;}
+.su-form input{flex:1;min-width:200px;padding:14px 16px;border:1px solid rgba(228,192,121,.3);background:rgba(255,255,255,.05);color:var(--cream);font-family:'Outfit';font-size:13px;border-radius:2px;}
+.su-form input::placeholder{color:rgba(240,232,216,.5);}
+.su-form input:focus{outline:none;border-color:var(--gold);}
+.su-form button{padding:14px 24px;background:var(--gold);color:var(--charcoal);border:none;border-radius:2px;font-family:'Outfit';font-size:13px;cursor:pointer;transition:.25s;}
+.su-form button:hover{background:var(--gold-light);}
+.signup .su-img{position:relative;min-height:300px;}
+.signup .su-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+
+/* footer */
+.footer{background:var(--canopy-2);color:rgba(240,232,216,.6);padding:60px 0 36px;}
+.footer-inner{max-width:var(--maxw);margin:0 auto;padding:0 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+.footer .f-logo{font-family:'Libre Baskerville',serif;font-size:22px;color:var(--cream);margin-bottom:14px;}
+.footer .f-logo .amp{color:var(--gold);}
+.footer p{font-size:13px;line-height:1.7;max-width:280px;}
+.footer h5{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer ul li{font-size:13px;cursor:pointer;transition:.2s;}
+.footer ul li:hover{color:var(--gold-light);}
+.footer-bottom{max-width:var(--maxw);margin:38px auto 0;padding:24px 32px 0;border-top:1px solid rgba(228,192,121,.15);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+
+/* ══════════ RESPONSIVE ══════════ */
+@media(max-width:1000px){
+  .anti{grid-template-columns:1fr;}
+  .steps,.specband,.docfan{grid-template-columns:1fr 1fr;}
+  .sheet-grid{grid-template-columns:1fr 1fr;}
+  .team,.stories,.pillars,.own{grid-template-columns:1fr;}
+  .concept{grid-template-columns:1fr;}
+  .signup,.teaser{grid-template-columns:1fr;}
+  .dash-body,.fmgrid,.anti-row{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr 1fr;}
+  .agg-layout{grid-template-columns:1fr;}
+  .agg-filters{position:static;}
+}
+@media(max-width:760px){
+  .nav-inner{padding:0 18px;gap:14px;}
+  .tabs{display:none;position:absolute;top:74px;left:0;right:0;background:var(--cream);flex-direction:column;padding:10px;border-bottom:1px solid var(--border);box-shadow:0 12px 24px rgba(0,0,0,.1);}
+  .tabs.open{display:flex;}
+  .tab{padding:14px 16px;}
+  .nav-cta{display:none;}
+  .menu-btn{display:block;}
+  .wrap{padding:0 20px;}
+  .gal{grid-template-columns:1fr;}
+  .g-tall,.g-wide,.g-third{grid-column:span 1;min-height:260px;grid-row:auto;}
+  .agg-bar{top:74px;}
+  .agg-filters{position:static;}
+  .pcard.list-mode{flex-direction:column;}
+  .pcard.list-mode .pc-img{width:100%;}
+  .specband,.steps,.docfan{grid-template-columns:1fr 1fr;}
+  .sheet-grid{grid-template-columns:1fr 1fr;}
+  .orchard3d{height:260vh;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;}
+  [data-reveal],.reveal-img img,.docard,.assemble{transition:none!important;opacity:1!important;transform:none!important;filter:none!important;}
+  .hero-media .kb{animation:none;}
+  .orchard3d,.sunset{height:auto;}
+  .orchard3d .sticky,.sunset .sticky{position:relative;height:70svh;}
+}
+.no-js [data-reveal],.no-js .reveal-img img,.no-js .docard{opacity:1;transform:none;filter:none;}
+</style>
+</head>
+<body class="no-js">
+
+<!-- atmosphere layers -->
+<canvas id="particle-canvas"></canvas>
+<div class="lightrays" id="lightrays"></div>
+<div class="grain"></div>
+
+<!-- ════════════ NAV ════════════ -->
+<nav class="nav hero-mode" id="nav">
+  <div class="nav-inner">
+    <a class="logo" data-go="home"><span class="amp">&amp;</span>t <small>The Farm Stories</small></a>
+    <button class="menu-btn" id="menuBtn">Menu</button>
+    <div class="tabs" id="tabs">
+      <span class="tab active" data-go="home">Home</span>
+      <span class="tab" data-go="project">The Project</span>
+      <span class="tab" data-go="plots">Plots &amp; Ownership</span>
+      <span class="tab" data-go="proof">Proof</span>
+      <span class="tab" data-go="story">Our Story</span>
+      <span class="tab" data-go="journal">Journal</span>
+    </div>
+    <a class="nav-cta" data-go="journal">Book a visit</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ PAGE 1 — HOME (cinematic) ═══════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <header class="hero-cine" id="hero">
+    <div class="hero-media">
+      <div class="kb" id="heroKb"></div>
+      <video id="heroVideo" autoplay muted loop playsinline preload="none"
+             poster="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2000&q=80">
+        <source src="https://cdn.coverr.co/videos/coverr-a-field-of-crops-5244/1080p.mp4" type="video/mp4">
+      </video>
+      <div class="hero-mist"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Mango Meadows · Peelamadu, Coimbatore</div>
+      <h1 id="heroTitle">
+        <span class="word"><span>The</span></span> <span class="word"><span>farm</span></span> <span class="word"><span>life</span></span> <span class="word"><span>you</span></span> <span class="word"><span>want,</span></span><br>
+        <em><span class="word"><span>without</span></span> <span class="word"><span>the</span></span> <span class="word"><span>farm</span></span> <span class="word"><span>work.</span></span></em>
+      </h1>
+      <p class="hero-sub">A boutique orchard of 25 families on 24 acres of thirty-year-old mango land — fully documented, professionally managed, and close enough to feel spontaneous. You own the orchard; we keep it alive.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-go="journal">Book a site visit</a>
+        <a class="btn btn-ghost" data-go="plots">Explore the 25 plots</a>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Scroll</span><span class="line"></span></div>
+  </header>
+
+  <!-- MANIFESTO -->
+  <section class="band">
+    <div class="wrap">
+      <p class="manifesto serif" id="manifesto">Most farmland is sold and forgotten. <em>Ours is sold and then quietly looked after</em> — old trees kept alive, funds kept transparent, a manager who picks up the phone.</p>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">How we work</div>
+      <h2 class="section-title">Own the orchard, not the workload.</h2>
+      <p class="lead" style="margin-bottom:40px;">Four steps that answer the only question that matters: <em>will I have to manage this?</em></p></div>
+      <div class="steps" data-stagger>
+        <div class="step" data-reveal><div class="num">01</div><h4>Find the soul</h4><p>We only take land that already has life — old trees, water, a view worth standing in.</p></div>
+        <div class="step" data-reveal><div class="num">02</div><h4>Build a community</h4><p>A capped 25 families. Small enough to know your orchard manager by name.</p></div>
+        <div class="step" data-reveal><div class="num">03</div><h4>Tell the story</h4><p>Monthly reports, dated photos, transparent funds — proof the place is moving.</p></div>
+        <div class="step" data-reveal><div class="num">04</div><h4>Stay present</h4><p>We don't disappear after registration. Care is structural, not a slogan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D MINIATURE ORCHARD -->
+  <section class="orchard3d" id="orchard3d">
+    <div class="sticky">
+      <canvas id="orchard-canvas"></canvas>
+      <div class="webgl-fallback" id="webglFallback" style="display:none;"></div>
+      <div class="o-vignette"></div>
+      <div class="orchard-cap">
+        <div class="cap-inner">
+          <div class="o-eyebrow">Twenty-four acres, seen slowly</div>
+          <div class="o-stage">
+            <div class="o-line" data-step="0">Thirty-year-old trees, mapped tree by tree.</div>
+            <div class="o-line" data-step="1">Twenty-five plots, drawn into living land.</div>
+            <div class="o-line" data-step="2">Roads laid, boundaries walked, water proven.</div>
+            <div class="o-line" data-step="3">A place you can stand in — not a render.</div>
+          </div>
+        </div>
+      </div>
+      <div class="o-progress"><div class="bar" id="oBar"></div></div>
+    </div>
+  </section>
+
+  <!-- ANTI-PITCH -->
+  <section class="band dark">
+    <div class="wrap">
+      <div class="anti">
+        <div data-reveal="left">
+          <div class="eyebrow">Why your skepticism is fair</div>
+          <h2 class="section-title">We know how this category usually ends.</h2>
+          <p class="lead">Glossy renders, hidden fees, plants that dry out the month after you stop visiting, developers who vanish. You're right to be wary. So before we sell you anything, here's exactly how we're built differently.</p>
+        </div>
+        <div class="anti-list" data-stagger>
+          <div class="anti-row" data-reveal="right"><div class="bad"><div class="k">Elsewhere</div><div class="v">Renders of a future that may never get built.</div></div><div class="good"><div class="k">Mango Meadows</div><div class="v">Real photos of 30-year-old trees already standing.</div></div></div>
+          <div class="anti-row" data-reveal="right"><div class="bad"><div class="k">Elsewhere</div><div class="v">Quote-gated pricing and hidden maintenance.</div></div><div class="good"><div class="k">Mango Meadows</div><div class="v">All-in cost published, maintenance terms in writing.</div></div></div>
+          <div class="anti-row" data-reveal="right"><div class="bad"><div class="k">Elsewhere</div><div class="v">3,000 customers, nobody answers the phone.</div></div><div class="good"><div class="k">Mango Meadows</div><div class="v">25 families, a manager who picks up.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED TEASER -->
+  <section class="band">
+    <div class="wrap">
+      <div class="teaser" data-reveal="scale">
+        <div class="t-img reveal-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1200&q=80" alt="Orchard meadow at golden hour"></div>
+        <div class="t-body">
+          <div class="eyebrow">Featured project</div>
+          <h3>Mango Meadows — a real place, not a promise.</h3>
+          <p>Twenty-four curated acres carved from a thirty-year-old grove, 45 km from Coimbatore. Close enough to feel spontaneous, far enough to feel free.</p>
+          <div class="spec-mini">
+            <div><div class="n">24</div><div class="l">Acres</div></div>
+            <div><div class="n">25</div><div class="l">Plots</div></div>
+            <div><div class="n">20–37</div><div class="l">Cents each</div></div>
+            <div><div class="n">75 min</div><div class="l">From the city</div></div>
+          </div>
+          <a class="btn btn-primary" data-go="project">See the project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AERIAL PLOTS -->
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">The layout, from above</div>
+      <h2 class="section-title">Twenty-five plots, drawn on living land.</h2>
+      <p class="lead" style="margin-bottom:36px;">Glowing boundaries trace each plot across the real aerial survey — hover any parcel to lift it from the grove.</p></div>
+      <div class="aerial" id="aerial" data-reveal="scale">
+        <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1800&q=80" alt="Aerial of the orchard">
+        <div class="a-grad"></div>
+        <svg viewBox="0 0 100 56" preserveAspectRatio="none" id="aerialSvg"></svg>
+        <div class="a-badge">Aerial survey · west-boundary orchard, Peelamadu</div>
+      </div>
+      <div style="text-align:center;margin-top:34px;" data-reveal>
+        <a class="btn btn-primary" data-go="plots">Browse all plots &amp; pricing →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOC CARDS -->
+  <section class="band tight">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">Registered on day one</div>
+      <h2 class="section-title">The paperwork, unfolded.</h2>
+      <p class="lead" style="margin-bottom:40px;">For a buyer who has been burned, documentation isn't a footnote — it's the hero. Here's exactly what you receive.</p></div>
+      <div class="docfan" id="docfan">
+        <div class="docard"><div class="di">EC</div><h5>Encumbrance Cert.</h5><p>Clean 30-year history</p></div>
+        <div class="docard"><div class="di">P</div><h5>Patta</h5><p>Transferred to you</p></div>
+        <div class="docard"><div class="di">SS</div><h5>Survey sketch</h5><p>FMB &amp; demarcation</p></div>
+        <div class="docard"><div class="di">RL</div><h5>Registered layout</h5><p>Approved &amp; on file</p></div>
+        <div class="docard"><div class="di">SD</div><h5>Sale deed</h5><p>Registered in your name</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OWNER DASHBOARD -->
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">Owner portal · preview</div>
+      <h2 class="section-title">The visible answer to "what happens after my money?"</h2>
+      <p class="lead" style="margin-bottom:36px;">The portal assembles as you scroll — the same way your orchard's story assembles, month after month.</p></div>
+      <div class="dash">
+        <div class="dash-top assemble"><span class="dot"></span><span>Mango Meadows · Owner Portal</span><span class="owner">Plot 14 · A. Krishnan</span></div>
+        <div class="dash-body">
+          <div class="dash-cell assemble">
+            <div class="ct">This month's orchard report</div>
+            <div class="dash-photo reveal-img"><img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=900&q=80" alt="Orchard update photo"></div>
+            <div class="dash-cap">June 2026 · 8 mango trees flowering on Plot 14, drip lines checked, mulch topped up. Next visit logged for 12 July.</div>
+          </div>
+          <div class="dash-cell assemble">
+            <div class="ct">Maintenance log</div>
+            <div class="log-row"><span class="ld">12</span><span class="lt">Jun · Watering &amp; pruning, north row</span></div>
+            <div class="log-row"><span class="ld">06</span><span class="lt">Jun · Pest inspection — clear</span></div>
+            <div class="log-row"><span class="ld">28</span><span class="lt">May · Fence repair, east boundary</span></div>
+            <div class="ct" style="margin-top:24px;">Fund use this quarter</div>
+            <div class="metric-row"><span class="mk">Watering &amp; labour</span><span class="mv">₹ on record</span></div>
+            <div class="metric-row"><span class="mk">Common areas</span><span class="mv">₹ on record</span></div>
+            <div class="metric-row"><span class="mk">Open requests</span><span class="mv">0 pending</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUNSET FINALE -->
+  <section class="sunset" id="sunset">
+    <div class="sticky">
+      <div class="sky"></div>
+      <div class="sun" id="sunOrb"></div>
+      <div class="ridge" id="sunRidge"></div>
+      <div class="haze"></div>
+      <div class="sunset-copy" id="sunsetCopy">
+        <div class="eyebrow">The clean visit closes everything</div>
+        <h2>Come stand on<br>the <em>plot.</em></h2>
+        <p>One drive, one walk through the grove, one honest conversation. No quote-gating, no pressure.</p>
+        <a class="btn btn-primary" data-go="journal">Book a site visit</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ PAGE 2 — THE PROJECT ═══════════════════════ -->
+<div class="page" id="page-project">
+  <div class="page-intro">
+    <div class="wrap">
+      <div class="crumb" data-reveal>The Farm Stories <b>/ Mango Meadows</b></div>
+      <h1 data-reveal>The dream made concrete:<br><em>real trees, not a render.</em></h1>
+      <p data-reveal>A boutique orchard community on land that has been growing mangoes for three decades. What you walk is what you buy.</p>
+    </div>
+  </div>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div class="specband" data-stagger>
+        <div class="cell" data-reveal><div class="n">24.5</div><div class="l">Acres total</div></div>
+        <div class="cell" data-reveal><div class="n">25</div><div class="l">Plots</div></div>
+        <div class="cell" data-reveal><div class="n">20–37</div><div class="l">Cents / plot</div></div>
+        <div class="cell" data-reveal><div class="n">45 km</div><div class="l">From Coimbatore</div></div>
+        <div class="cell" data-reveal><div class="n">75–90</div><div class="l">Minute drive</div></div>
+      </div>
+      <p class="divider-note" data-reveal>"Close enough to feel spontaneous, far enough to feel free." — the drive-time question, answered up front.</p>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">Site gallery · real photography</div>
+      <h2 class="section-title">Named plots, real views.</h2></div>
+      <div class="gal" data-stagger>
+        <figure class="g-tall reveal-img"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=80" alt="Nilgiris view"><figcaption>Plot 04 — Nilgiris view, north ridge</figcaption></figure>
+        <figure class="g-wide reveal-img"><img src="https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=1100&q=80" alt="West boundary orchard"><figcaption>West-boundary mango grove</figcaption></figure>
+        <figure class="g-third reveal-img"><img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=700&q=80" alt="Old mango canopy"><figcaption>30-year-old canopy</figcaption></figure>
+        <figure class="g-third reveal-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=700&q=80" alt="Meadow trail"><figcaption>The lower swale trail</figcaption></figure>
+        <figure class="g-third reveal-img"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=700&q=80" alt="Morning mist"><figcaption>Morning mist, plot 25</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">What you actually own</div>
+      <h2 class="section-title">Honest infrastructure. No imagined amenities.</h2>
+      <p class="lead" style="margin-bottom:34px;">The category's number-one complaint is amenities that never get built. So we list only what is being built — and we under-promise on purpose.</p></div>
+      <div class="own" data-stagger>
+        <div class="item" data-reveal><div class="ic">i.</div><h4>Fencing &amp; boundary</h4><p>Full perimeter fencing with demarcated plot lines and survey stones.</p></div>
+        <div class="item" data-reveal><div class="ic">ii.</div><h4>22-ft internal roads</h4><p>Laid roads to every plot, plus a 30-ft spine and 12-ft private approach.</p></div>
+        <div class="item" data-reveal><div class="ic">iii.</div><h4>Retained mango trees</h4><p>Existing 30-year-old trees kept in place — proof, not an amenity.</p></div>
+        <div class="item" data-reveal><div class="ic">iv.</div><h4>Common pavilion</h4><p>A clubhouse-style shared built space with covered and open views.</p></div>
+        <div class="item" data-reveal><div class="ic">v.</div><h4>Setback walkway</h4><p>A looped walking trail along the swale with small pavilions throughout.</p></div>
+        <div class="item" data-reveal><div class="ic">vi.</div><h4>Borewell &amp; water</h4><p>Verified borewell yield with documented source — listed on the Proof page.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div class="teaser" data-reveal="scale">
+        <div class="t-body">
+          <div class="eyebrow">No quote-gating</div>
+          <h3>The brochure and a real phone number.</h3>
+          <p>Download the full project brochure and pricing, or call the orchard manager directly. No forms standing between you and an honest answer.</p>
+          <div class="hero-actions" style="margin-top:0;">
+            <a class="btn btn-primary" href="#" onclick="return false;">Download brochure (PDF)</a>
+            <a class="btn btn-ghost" style="border-color:var(--dark-earth);color:var(--dark-earth);background:transparent;" href="tel:+910000000000">+91 00000 00000</a>
+          </div>
+        </div>
+        <div class="t-img reveal-img"><img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=1100&q=80" alt="Country road to the orchard"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ PAGE 3 — PLOTS (aggregator) ═══════════════════════ -->
+<div class="page" id="page-plots">
+  <div class="page-intro">
+    <div class="wrap">
+      <div class="crumb" data-reveal>Mango Meadows <b>/ Plots &amp; Ownership</b></div>
+      <h1 data-reveal>Twenty-five plots.<br><em>Only twenty-five families.</em></h1>
+      <p data-reveal>Search, filter and compare every plot in the layout — a proper listing, not a brochure. Honest scarcity: when a plot is gone, it's gone. Site 25 carries the show home and shared pavilion.</p>
+    </div>
+  </div>
+
+  <section class="band tight">
+    <div class="wrap">
+      <!-- aggregator search bar -->
+      <div class="agg-bar">
+        <div class="agg-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/></svg>
+          <input id="aggSearch" placeholder="Search by plot no., view or size…">
+        </div>
+        <div class="agg-sort"><span>Sort</span>
+          <select id="aggSort">
+            <option value="num">Plot number</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="size-desc">Size: largest first</option>
+            <option value="avail">Available first</option>
+          </select>
+        </div>
+        <div class="agg-view">
+          <button id="viewGrid" class="active">Grid</button>
+          <button id="viewList">List</button>
+          <button id="viewMap">Aerial</button>
+        </div>
+      </div>
+
+      <div class="agg-layout">
+        <aside class="agg-filters">
+          <h3>Refine</h3>
+          <div class="sub">Filter the layout by availability, view and size.</div>
+          <div class="ctrl-label">Availability</div>
+          <div class="filter-row" data-group="status">
+            <span class="chip active" data-val="all">All</span>
+            <span class="chip" data-val="available">Available</span>
+            <span class="chip" data-val="reserved">Reserved</span>
+            <span class="chip" data-val="sold">Sold</span>
+          </div>
+          <div class="ctrl-label">View</div>
+          <div class="filter-row" data-group="view">
+            <span class="chip active" data-val="all">All</span>
+            <span class="chip" data-val="Nilgiris">Nilgiris</span>
+            <span class="chip" data-val="Swale">Swale</span>
+            <span class="chip" data-val="Orchard">Orchard</span>
+            <span class="chip" data-val="Corner">Corner</span>
+          </div>
+          <div class="ctrl-label">Size</div>
+          <div class="filter-row" data-group="size">
+            <span class="chip active" data-val="all">All</span>
+            <span class="chip" data-val="s">20–25 ¢</span>
+            <span class="chip" data-val="m">25–30 ¢</span>
+            <span class="chip" data-val="l">30 ¢ +</span>
+          </div>
+          <div class="legend-box">
+            <div class="lr"><span class="sw" style="background:var(--sage)"></span>Available</div>
+            <div class="lr"><span class="sw" style="background:var(--gold)"></span>Reserved</div>
+            <div class="lr"><span class="sw" style="background:#B9AC98"></span>Sold</div>
+          </div>
+        </aside>
+
+        <div>
+          <div class="agg-count">Showing <b id="aggShown">25</b> of 25 plots · avg <b id="aggAvg">₹—</b></div>
+          <div class="agg-grid" id="aggGrid"></div>
+          <div class="agg-map" id="aggMap">
+            <div class="aerial in" id="aggAerial" style="aspect-ratio:16/10;">
+              <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1800&q=80" alt="Aerial layout">
+              <div class="a-grad"></div>
+              <svg viewBox="0 0 100 56" preserveAspectRatio="none" id="aggAerialSvg"></svg>
+              <div class="a-badge">Tap a glowing parcel to open the listing</div>
+            </div>
+          </div>
+          <div class="agg-empty" id="aggEmpty">No plots match those filters. Try widening your search.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight cream2">
+    <div class="wrap" style="text-align:center;">
+      <div data-reveal><div class="eyebrow sage" style="display:block;">Ownership &amp; the portal</div>
+      <h2 class="section-title" style="margin:0 auto 0;">"We stay present" is structural, not a slogan.</h2>
+      <p class="lead" style="margin:0 auto;">Managed ownership isn't a separate product — it's how the orchard runs. Monthly orchard reports, dated photo updates and a request tracker keep an absentee owner feeling present without lifting a tool.</p></div>
+      <div style="margin-top:30px;" data-reveal><a class="btn btn-primary" data-go="proof">See the documentation &amp; proof →</a></div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="wrap">
+      <div data-reveal><h2>Found one you like?<br><em>Walk it before you decide.</em></h2>
+      <p>We'll hold a plot for your visit. Standing on the land is the only fair way to choose.</p>
+      <a class="btn btn-primary" data-go="journal">Book a site visit</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ PAGE 4 — PROOF ═══════════════════════ -->
+<div class="page" id="page-proof">
+  <div class="page-intro">
+    <div class="wrap">
+      <div class="crumb" data-reveal>Mango Meadows <b>/ Proof &amp; Documentation</b></div>
+      <h1 data-reveal>Documentation first.<br><em>The page no one else leads with.</em></h1>
+      <p data-reveal>For a buyer who has been burned, paperwork isn't a footnote — it's the hero. Here are the five fears, answered in order.</p>
+    </div>
+  </div>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">The Tier-1 trust stack</div>
+      <h2 class="section-title">Five fears, five answers.</h2></div>
+      <div class="proofstack" data-stagger>
+        <div class="proof-item" data-reveal><div class="pi-num">01</div><div><h4>Clear title &amp; patta</h4><p>Marketable title with patta in the buyer's name. Encumbrance certificate and survey sketch verified before sale.</p></div><div class="pi-check">Verified</div></div>
+        <div class="proof-item" data-reveal><div class="pi-num">02</div><div><h4>Water security</h4><p>Documented borewell yield and source, with the swale providing seasonal recharge across the lower plots.</p></div><div class="pi-check">Documented</div></div>
+        <div class="proof-item" data-reveal><div class="pi-num">03</div><div><h4>Maintenance in writing</h4><p>A signed maintenance agreement — scope, frequency and fees fixed on paper before you commit.</p></div><div class="pi-check">In writing</div></div>
+        <div class="proof-item" data-reveal><div class="pi-num">04</div><div><h4>All-in cost, no hidden fees</h4><p>One published price. Registration, development and first-year maintenance laid out line by line.</p></div><div class="pi-check">Published</div></div>
+        <div class="proof-item" data-reveal><div class="pi-num">05</div><div><h4>Post-sale commitment</h4><p>A named orchard manager and a written care plan that continues long after registration.</p></div><div class="pi-check">Committed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">What you'll receive</div>
+      <h2 class="section-title">Registered on day one.</h2>
+      <p class="lead" style="margin-bottom:30px;">Immediate registration — no waiting, no "after the next phase." The exact documents handed over with your plot:</p></div>
+      <div class="docfan" data-docfan>
+        <div class="docard"><div class="di">EC</div><h5>Encumbrance Cert.</h5><p>Clean 30-year history</p></div>
+        <div class="docard"><div class="di">P</div><h5>Patta</h5><p>Transferred to you</p></div>
+        <div class="docard"><div class="di">SS</div><h5>Survey sketch</h5><p>FMB &amp; demarcation</p></div>
+        <div class="docard"><div class="di">RL</div><h5>Registered layout</h5><p>Approved &amp; on file</p></div>
+        <div class="docard"><div class="di">SD</div><h5>Sale deed</h5><p>Registered in your name</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">What goes wrong elsewhere — and how we prevent it</div>
+      <h2 class="section-title">We turned the bad reviews into our checklist.</h2></div>
+      <div class="fmgrid" data-stagger>
+        <div class="fm" data-reveal><div class="fbad"><b>Common failure</b> Plants dry out once visits stop.</div><div class="fgood"><b>Our safeguard</b> A dedicated manager waters and reports monthly, funded transparently.</div></div>
+        <div class="fm" data-reveal><div class="fbad"><b>Common failure</b> Complaints ignored after payment.</div><div class="fgood"><b>Our safeguard</b> A request tracker in your owner dashboard with response timelines.</div></div>
+        <div class="fm" data-reveal><div class="fbad"><b>Common failure</b> No electricity or roads for years.</div><div class="fgood"><b>Our safeguard</b> Roads laid before sale; power timeline published in the Journal.</div></div>
+        <div class="fm" data-reveal><div class="fbad"><b>Common failure</b> Developer vanishes after the launch.</div><div class="fgood"><b>Our safeguard</b> A 25-family cap and a local Coimbatore team you can visit.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ PAGE 5 — OUR STORY ═══════════════════════ -->
+<div class="page" id="page-story">
+  <div class="page-intro">
+    <div class="wrap">
+      <div class="crumb" data-reveal>The Farm Stories <b>/ Our Story</b></div>
+      <h1 data-reveal>Land with a soul,<br><em>not a spec sheet.</em></h1>
+      <p data-reveal>We're a new brand. We think that's a feature: a 25-family operation can be personal in a way a 3,000-customer developer never can.</p>
+    </div>
+  </div>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div class="concept">
+        <div class="c-img reveal-img" data-reveal="left"><img src="https://images.unsplash.com/photo-1444858291040-58f756a3bdd6?auto=format&fit=crop&w=900&q=80" alt="Orchard at golden hour"></div>
+        <div data-reveal="right">
+          <span class="ctag">Founding belief</span>
+          <h3>We buy land that already has a life.</h3>
+          <p>The burnt-out professional isn't shopping for square footage. They're shopping for slow mornings, old trees, and a place that already feels lived in. So we don't clear and grid — we find groves with thirty years of growth and build lightly around them.</p>
+          <p>Boutique scale isn't a limitation. It's the whole point.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">Three pillars</div>
+      <h2 class="section-title">What we promise, restated as principles.</h2></div>
+      <div class="pillars" data-stagger>
+        <div class="pillar" data-reveal><div class="pn">I</div><h4>Curated land</h4><p>We only take land with existing soul — mature trees, water, a real view. No bare grids.</p></div>
+        <div class="pillar" data-reveal><div class="pn">II</div><h4>Boutique scale</h4><p>A hard cap of 25 families. Small enough to stay personal and accountable for decades.</p></div>
+        <div class="pillar" data-reveal><div class="pn">III</div><h4>Documentation trust</h4><p>Everything in writing, registered on day one. Transparency is our entire competitive edge.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">The people behind it</div>
+      <h2 class="section-title">Real faces, a Coimbatore base.</h2></div>
+      <div class="team" data-stagger>
+        <div class="member" data-reveal>
+          <div class="m-img reveal-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=700&q=80" alt="Founder"></div>
+          <h4>The founders</h4><div class="role">Coimbatore</div>
+          <p>Built The Farm Stories after watching the farmland category sell promises it never kept. Decided to do the opposite.</p>
+        </div>
+        <div class="member" data-reveal>
+          <div class="m-img reveal-img"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Orchard manager"></div>
+          <h4>Murugan R.</h4><div class="role">Orchard manager</div>
+          <p>On the land most days. Knows every tree on the site by row and the name of every owner. The person who picks up the phone.</p>
+        </div>
+        <div class="member" data-reveal>
+          <div class="m-img reveal-img"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=700&q=80" alt="Design lead"></div>
+          <h4>Design studio &amp;t</h4><div class="role">Architecture &amp; landscape</div>
+          <p>The team behind the swale-bridging pavilions and the treetop deck — designing around the land, not over it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════ PAGE 6 — JOURNAL ═══════════════════════ -->
+<div class="page" id="page-journal">
+  <div class="page-intro">
+    <div class="wrap">
+      <div class="crumb" data-reveal>The Farm Stories <b>/ Journal &amp; Visit</b></div>
+      <h1 data-reveal>Living proof the<br><em>project is moving.</em></h1>
+      <p data-reveal>Dated progress, slow-living stories, and the two ways to take the next step — subscribe, or come stand on the land.</p>
+    </div>
+  </div>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">Project updates</div>
+      <h2 class="section-title">Visible momentum.</h2></div>
+      <div class="timeline" data-stagger>
+        <div class="tl-item" data-reveal="left"><div class="tl-date">June 2026</div><h4>Plots demarcated</h4><p>All 25 plots staked with survey stones. Plot 25 show-home foundation begins.</p><div class="pct">Site readiness — 78%</div></div>
+        <div class="tl-item" data-reveal="left"><div class="tl-date">May 2026</div><h4>Registered layout approved</h4><p>Layout cleared and on file; immediate registration now available to buyers.</p><div class="pct">Documentation — 100%</div></div>
+        <div class="tl-item" data-reveal="left"><div class="tl-date">April 2026</div><h4>Internal roads laid</h4><p>22-ft internal roads and the 30-ft spine graded and rolled across the site.</p><div class="pct">Roads — 90%</div></div>
+        <div class="tl-item" data-reveal="left"><div class="tl-date">March 2026</div><h4>Perimeter fencing complete</h4><p>Full boundary fencing installed; old mango grove surveyed and retained.</p><div class="pct">Fencing — 100%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight cream2">
+    <div class="wrap">
+      <div data-reveal><div class="eyebrow sage">From the farm</div>
+      <h2 class="section-title">Slow-living stories.</h2></div>
+      <div class="stories" data-stagger>
+        <div class="story" data-reveal><div class="s-img reveal-img"><img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=700&q=80" alt="Mango season"></div><div class="s-body"><div class="s-cat">Seasons</div><h4>The first mango season under our care</h4><p>What thirty-year-old trees give back when someone finally tends them again.</p></div></div>
+        <div class="story" data-reveal><div class="s-img reveal-img"><img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=700&q=80" alt="Misty morning"></div><div class="s-body"><div class="s-cat">Field notes</div><h4>A morning walk along the swale</h4><p>Why the lowest, wettest part of the site became the most loved.</p></div></div>
+        <div class="story" data-reveal><div class="s-img reveal-img"><img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=700&q=80" alt="Trees and light"></div><div class="s-body"><div class="s-cat">Slow living</div><h4>What "owning the orchard" actually feels like</h4><p>An owner on her second visit, and the weekend that changed her mind.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight">
+    <div class="wrap">
+      <div class="signup" data-reveal="scale">
+        <div class="su-body">
+          <div class="eyebrow">Two temperatures, two commitments</div>
+          <h3>Book a visit — or just follow along.</h3>
+          <p>The warm lead subscribes to the monthly journal. The ready buyer books a site visit. Either is a fine place to start.</p>
+          <div class="su-form">
+            <input type="email" placeholder="Your email address" aria-label="Email">
+            <button onclick="alert('Thanks — we\'ll send the monthly journal. (demo)')">Subscribe</button>
+          </div>
+          <div style="margin-top:22px;">
+            <a class="btn btn-primary" onclick="alert('Visit request — a real form would open here. (demo)')">Book a site visit →</a>
+          </div>
+        </div>
+        <div class="su-img reveal-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80" alt="Orchard meadow at golden hour"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════ PLOT MODAL ════════════ -->
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-label="Plot details">
+  <div class="scrim" data-close></div>
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="f-logo"><span class="amp">&amp;</span>t · The Farm Stories</div>
+      <p>A boutique managed orchard of 25 families at Mango Meadows, Peelamadu, Coimbatore. Own the orchard, not the workload.</p>
+    </div>
+    <div><h5>Explore</h5><ul><li data-go="project">The Project</li><li data-go="plots">Plots &amp; Ownership</li><li data-go="proof">Proof</li><li data-go="story">Our Story</li></ul></div>
+    <div><h5>Company</h5><ul><li data-go="story">Our Story</li><li data-go="plots">Ownership</li><li data-go="journal">Journal</li></ul></div>
+    <div><h5>Visit</h5><ul><li data-go="journal">Book a site visit</li><li>Peelamadu, Coimbatore</li><li>+91 00000 00000</li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 The Farm Stories. Concept experience.</span>
+    <span>Documentation first · 25 families · 24 acres</span>
+  </div>
+</footer>
+
+<!-- ════════════ LIBS ════════════ -->
+<script src="./vendor/gsap.min.js"></script>
+<script src="./vendor/ScrollTrigger.min.js"></script>
+<script src="./vendor/lenis.min.js"></script>
+<script src="./vendor/three.min.js"></script>
+<script>
+document.body.classList.remove('no-js');
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasGSAP = typeof gsap !== 'undefined';
+if (hasGSAP && typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+/* ───────── LENIS SMOOTH SCROLL ───────── */
+let lenis = null;
+if (!REDUCED && typeof Lenis !== 'undefined') {
+  lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10*t)), smoothWheel: true });
+  if (hasGSAP && typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf = t => { lenis.raf(t); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+}
+
+/* ───────── REVEAL (IntersectionObserver) ───────── */
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+function registerReveals(root) {
+  root.querySelectorAll('[data-reveal],.reveal-img').forEach(el => {
+    if (el.classList.contains('in')) return;
+    revealIO.observe(el);
+  });
+  // stagger delays within a group
+  root.querySelectorAll('[data-stagger]').forEach(group => {
+    [...group.children].forEach((child, i) => {
+      const d = Math.min(i*0.07, 0.5);
+      child.style.transitionDelay = d + 's';
+      const inner = child.querySelector && child.querySelector('img');
+      if (inner) inner.style.transitionDelay = (d+0.05) + 's';
+    });
+  });
+}
+registerReveals(document);
+
+/* doc fan unfold (proof page) */
+const docIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      [...e.target.children].forEach((c,i)=> c.style.transitionDelay = (i*0.09)+'s');
+      docIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('#docfan,[data-docfan]').forEach(el => docIO.observe(el));
+
+/* dashboard assemble */
+const asmIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const parts = e.target.parentElement.querySelectorAll('.assemble');
+      e.target.parentElement.querySelectorAll('.assemble').forEach((p,i)=>{
+        p.style.transitionDelay = (i*0.15)+'s'; p.classList.add('in');
+      });
+      asmIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('.dash .assemble').forEach((el,i)=>{ if(i===0) asmIO.observe(el); });
+
+/* ───────── HERO ───────── */
+(function heroInit(){
+  // reveal title words
+  const words = document.querySelectorAll('#heroTitle .word > span');
+  if (hasGSAP && !REDUCED) {
+    gsap.to(words, { y:0, duration:1.1, ease:'expo.out', stagger:0.055, delay:0.25 });
+  } else {
+    words.forEach(w => w.style.transform = 'none');
+  }
+  // graceful video enhancement — only reveal if it actually plays
+  const v = document.getElementById('heroVideo');
+  if (v && !REDUCED) {
+    v.load();
+    const reveal = () => v.classList.add('ready');
+    v.addEventListener('playing', reveal, { once:true });
+    v.addEventListener('canplaythrough', () => { v.play().then(reveal).catch(()=>{}); }, { once:true });
+    v.addEventListener('error', () => v.remove(), { once:true });
+  } else if (v) { v.remove(); }
+  // hero parallax
+  if (hasGSAP && !REDUCED) {
+    gsap.to('#heroKb', { yPercent:16, ease:'none', scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:true }});
+    gsap.to('.hero-inner', { yPercent:-12, opacity:0.3, ease:'none', scrollTrigger:{ trigger:'#hero', start:'top top', end:'bottom top', scrub:true }});
+  }
+})();
+
+/* light rays visible after hero */
+if (hasGSAP) {
+  ScrollTrigger.create({ trigger:'#hero', start:'bottom 70%',
+    onEnter:()=>document.getElementById('lightrays').classList.add('on'),
+    onLeaveBack:()=>document.getElementById('lightrays').classList.remove('on') });
+}
+
+/* ───────── MANIFESTO word-lighting ───────── */
+(function manifesto(){
+  const el = document.getElementById('manifesto');
+  if(!el) return;
+  const html = el.innerHTML;
+  // wrap words in .m-word (preserve <em>)
+  const walk = (node) => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(tok => {
+          if (/^\s+$/.test(tok) || tok==='') { frag.appendChild(document.createTextNode(tok)); }
+          else { const s=document.createElement('span'); s.className='m-word'; s.textContent=tok; frag.appendChild(s); }
+        });
+        node.replaceChild(frag, n);
+      } else if (n.nodeType === 1) walk(n);
+    });
+  };
+  walk(el);
+  const mwords = el.querySelectorAll('.m-word');
+  if (REDUCED || !hasGSAP) { mwords.forEach(w=>w.classList.add('lit')); return; }
+  ScrollTrigger.create({
+    trigger: el, start:'top 80%', end:'bottom 55%', scrub:true,
+    onUpdate: self => {
+      const n = Math.round(self.progress * mwords.length);
+      mwords.forEach((w,i)=> w.classList.toggle('lit', i < n));
+    }
+  });
+})();
+
+/* ───────── AERIAL glowing plot boundaries ───────── */
+function buildAerial(svgId, onClick){
+  const svg = document.getElementById(svgId);
+  if(!svg) return;
+  const cols=5, rows=5, gap=1.4, mL=6, mT=4, W=100, H=56;
+  const cw=(W-mL*2-gap*(cols-1))/cols, ch=(H-mT*2-gap*(rows-1))/rows;
+  let html='';
+  for(let i=0;i<25;i++){
+    const c=i%cols, r=Math.floor(i/cols);
+    const x=mL+c*(cw+gap), y=mT+r*(ch+gap);
+    const jx=(Math.random()-0.5)*0.8, jy=(Math.random()-0.5)*0.6;
+    const perim=2*(cw+ch);
+    const n=i+1;
+    html+=`<polygon class="plot-shape" data-n="${n}" style="--len:${perim.toFixed(1)};transition-delay:${(i*0.05).toFixed(2)}s"
+      points="${(x+jx).toFixed(1)},${(y+jy).toFixed(1)} ${(x+cw+jx).toFixed(1)},${(y+jy*0.6).toFixed(1)} ${(x+cw+jx*0.7).toFixed(1)},${(y+ch+jy).toFixed(1)} ${(x+jx).toFixed(1)},${(y+ch+jy*0.7).toFixed(1)}"></polygon>`;
+  }
+  svg.innerHTML=html;
+  if(onClick){
+    svg.querySelectorAll('.plot-shape').forEach(p=>{
+      p.style.cursor='pointer';
+      p.addEventListener('click',()=>onClick(+p.dataset.n));
+    });
+  }
+}
+buildAerial('aerialSvg');
+
+/* ───────── SUNSET FINALE ───────── */
+(function sunset(){
+  if(!hasGSAP || REDUCED) return;
+  const tl = gsap.timeline({ scrollTrigger:{ trigger:'#sunset', start:'top top', end:'bottom bottom', scrub:1 }});
+  tl.to('#sunOrb', { top:'34%', scale:1.35, ease:'none' }, 0)
+    .to('#sunRidge', { yPercent:-8, ease:'none' }, 0)
+    .fromTo('#sunsetCopy', { y:40, opacity:0 }, { y:0, opacity:1, ease:'none', duration:0.5 }, 0.15)
+    .to('#sunsetCopy', { y:-30, opacity:0.85, ease:'none' }, 0.7);
+  // sky warms as we pull back
+  gsap.fromTo('.sunset .sky', { filter:'brightness(1)' }, { filter:'brightness(1.15) saturate(1.15)',
+    scrollTrigger:{ trigger:'#sunset', start:'top top', end:'bottom bottom', scrub:1 }});
+})();
+
+/* ═══════════ THREE.JS — miniature orchard ═══════════ */
+(function orchard(){
+  const canvas = document.getElementById('orchard-canvas');
+  const wrap = document.getElementById('orchard3d');
+  if (typeof THREE === 'undefined' || !canvas) {
+    document.getElementById('webglFallback').style.display='block';
+    return;
+  }
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+  } catch(err){ document.getElementById('webglFallback').style.display='block'; return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.setClearColor(0x162015, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x1b2a19, 0.035);
+
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 200);
+  camera.position.set(0, 14, 26);
+
+  // lights — selective shadows (key light only)
+  const hemi = new THREE.HemisphereLight(0xd9e6cf, 0x2a2115, 0.55);
+  scene.add(hemi);
+  const amb = new THREE.AmbientLight(0xffe8c2, 0.35); scene.add(amb);
+  const sun = new THREE.DirectionalLight(0xffd9a0, 1.5);
+  sun.position.set(-18, 22, 10);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(1024,1024);
+  sun.shadow.camera.near=1; sun.shadow.camera.far=90;
+  sun.shadow.camera.left=-32; sun.shadow.camera.right=32; sun.shadow.camera.top=32; sun.shadow.camera.bottom=-32;
+  scene.add(sun);
+  const rim = new THREE.DirectionalLight(0xc9973a, 0.5); rim.position.set(14,8,-16); scene.add(rim);
+
+  // ground
+  const groundGeo = new THREE.PlaneGeometry(120,120,1,1);
+  const groundMat = new THREE.MeshStandardMaterial({ color:0x3a4a2c, roughness:1, metalness:0 });
+  const ground = new THREE.Mesh(groundGeo, groundMat);
+  ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
+  // subtle earth patches / paths
+  const pathMat = new THREE.MeshStandardMaterial({ color:0x6a5638, roughness:1 });
+  for(let i=-2;i<=2;i++){
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 44), pathMat);
+    p.rotation.x=-Math.PI/2; p.position.set(i*9, 0.02, 0); p.receiveShadow=true; scene.add(p);
+  }
+
+  // trees (instanced-ish via shared geo)
+  const trunkGeo = new THREE.CylinderGeometry(0.32,0.42,2.4,6);
+  const trunkMat = new THREE.MeshStandardMaterial({ color:0x5b4327, roughness:.9 });
+  const canopyGeo = new THREE.IcosahedronGeometry(1.9, 1);
+  const treeGroup = new THREE.Group();
+  const canopyColors = [0x4a6449,0x5a7a4e,0x3f5a3a,0x6b8c6a];
+  const rows=6, cols=9, spacingX=5, spacingZ=5.5;
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const g = new THREE.Group();
+      const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+      trunk.position.y=1.2; trunk.castShadow=true; g.add(trunk);
+      const scale = 0.8 + Math.random()*0.5;
+      const cMat = new THREE.MeshStandardMaterial({ color:canopyColors[(r+c)%canopyColors.length], roughness:.85, flatShading:true });
+      const canopy = new THREE.Mesh(canopyGeo, cMat);
+      canopy.position.y = 3.1; canopy.scale.setScalar(scale); canopy.castShadow=true;
+      // little mango dots
+      g.add(canopy);
+      g.position.set((c-(cols-1)/2)*spacingX + (Math.random()-.5)*1.2, 0, (r-(rows-1)/2)*spacingZ + (Math.random()-.5)*1.2);
+      g.userData.phase = Math.random()*Math.PI*2;
+      g.userData.baseScale = 1;
+      treeGroup.add(g);
+    }
+  }
+  scene.add(treeGroup);
+
+  // floating pollen points (WebGL) — ~2500
+  const COUNT = 2500;
+  const pos = new Float32Array(COUNT*3);
+  for(let i=0;i<COUNT;i++){
+    pos[i*3]=(Math.random()-.5)*80; pos[i*3+1]=Math.random()*24; pos[i*3+2]=(Math.random()-.5)*70;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  const pMat = new THREE.PointsMaterial({ color:0xe4c079, size:0.16, transparent:true, opacity:.7, depthWrite:false, blending:THREE.AdditiveBlending });
+  const pollen = new THREE.Points(pGeo, pMat);
+  scene.add(pollen);
+
+  function resize(){
+    const w = wrap.clientWidth, h = window.innerHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // scroll progress → camera rig (scrub feel)
+  let progress = 0, targetProgress = 0;
+  const captions = document.querySelectorAll('.o-line');
+  const bar = document.getElementById('oBar');
+  function setProgress(p){
+    targetProgress = Math.max(0, Math.min(1, p));
+    const idx = Math.min(captions.length-1, Math.floor(targetProgress * captions.length));
+    captions.forEach((c,i)=> c.classList.toggle('show', i===idx));
+    if(bar) bar.style.width = (targetProgress*100)+'%';
+  }
+  function updateCam(){
+    // rotate, tilt, zoom across scroll
+    const p = progress;
+    const angle = -0.5 + p*1.4;              // orbit
+    const radius = 30 - p*12;                 // zoom in
+    const height = 16 - p*7;                   // descend
+    camera.position.x = Math.sin(angle)*radius;
+    camera.position.z = Math.cos(angle)*radius;
+    camera.position.y = height + Math.sin(p*Math.PI)*3;
+    camera.lookAt(0, 3 + p*1.2, 0);
+    // tilt sun toward sunset as we descend
+    sun.position.x = -18 + p*30;
+    sun.color.setHSL(0.09 - p*0.03, 0.7, 0.6 - p*0.12);
+  }
+
+  if (hasGSAP) {
+    ScrollTrigger.create({
+      trigger:'#orchard3d', start:'top top', end:'bottom bottom', scrub: REDUCED?false:true,
+      onUpdate: self => setProgress(self.progress),
+      onRefresh: self => setProgress(self.progress)
+    });
+  } else {
+    // fallback: manual scroll
+    const onScroll = ()=>{
+      const rect = wrap.getBoundingClientRect();
+      const p = (-rect.top) / (rect.height - window.innerHeight);
+      setProgress(p);
+    };
+    window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  }
+  setProgress(0);
+
+  // render loop — only when section near viewport & home active
+  let active = false;
+  const visIO = new IntersectionObserver((es)=>{ es.forEach(e=> active = e.isIntersecting); }, { rootMargin:'20% 0px' });
+  visIO.observe(wrap);
+
+  const clock = new THREE.Clock();
+  function loop(){
+    requestAnimationFrame(loop);
+    if(!active || !document.getElementById('page-home').classList.contains('active')) return;
+    progress += (targetProgress - progress) * 0.08;
+    const t = clock.getElapsedTime();
+    updateCam();
+    // gentle canopy sway
+    treeGroup.children.forEach((g)=>{ g.rotation.z = Math.sin(t*0.6 + g.userData.phase)*0.02; });
+    pollen.rotation.y = t*0.02;
+    pollen.position.y = Math.sin(t*0.3)*0.6;
+    renderer.render(scene, camera);
+  }
+  loop();
+  window.__orchardRefresh = resize;
+})();
+
+/* ═══════════ 2D PARTICLE OVERLAY — leaves, blossoms, pollen ═══════════ */
+(function particles(){
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, DPR = Math.min(window.devicePixelRatio, 2);
+  function size(){ W=window.innerWidth; H=window.innerHeight; canvas.width=W*DPR; canvas.height=H*DPR; canvas.style.width=W+'px'; canvas.style.height=H+'px'; ctx.setTransform(DPR,0,0,DPR,0,0); }
+  size(); window.addEventListener('resize', size);
+
+  const COUNT = window.innerWidth < 760 ? 16 : 30;
+  const kinds = ['leaf','blossom','pollen'];
+  const leafColor = ['#6b8c6a','#4a6449','#7a6244','#c9973a'];
+  let scrollBoost = 0;
+  if (lenis) lenis.on('scroll', ({velocity})=>{ scrollBoost = Math.min(Math.abs(velocity)*0.04, 6); });
+  else window.addEventListener('scroll', ()=>{ scrollBoost = 3; });
+
+  const parts = Array.from({length:COUNT}, () => spawn(true));
+  function spawn(init){
+    const kind = kinds[Math.floor(Math.random()*kinds.length)];
+    return {
+      kind,
+      x: Math.random()*W,
+      y: init ? Math.random()*H : -20,
+      size: kind==='pollen' ? 1.5+Math.random()*2 : 6+Math.random()*10,
+      vx: (Math.random()-0.5)*0.4,
+      vy: kind==='pollen' ? 0.2+Math.random()*0.4 : 0.5+Math.random()*0.9,
+      rot: Math.random()*Math.PI*2,
+      vr: (Math.random()-0.5)*0.03,
+      sway: Math.random()*Math.PI*2,
+      swaySpeed: 0.01+Math.random()*0.02,
+      color: kind==='blossom' ? '#f3e2d0' : leafColor[Math.floor(Math.random()*leafColor.length)],
+      opacity: kind==='pollen' ? 0.5+Math.random()*0.4 : 0.55+Math.random()*0.35
+    };
+  }
+  function drawLeaf(p){
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.opacity; ctx.fillStyle=p.color;
+    ctx.beginPath(); ctx.moveTo(0,-p.size*0.5);
+    ctx.quadraticCurveTo(p.size*0.5,0, 0,p.size*0.5);
+    ctx.quadraticCurveTo(-p.size*0.5,0, 0,-p.size*0.5);
+    ctx.fill();
+    ctx.strokeStyle='rgba(0,0,0,.08)'; ctx.lineWidth=0.5; ctx.beginPath(); ctx.moveTo(0,-p.size*0.5); ctx.lineTo(0,p.size*0.5); ctx.stroke();
+    ctx.restore();
+  }
+  function drawBlossom(p){
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.opacity;
+    for(let i=0;i<5;i++){ ctx.rotate(Math.PI*2/5); ctx.fillStyle=p.color; ctx.beginPath(); ctx.ellipse(0,-p.size*0.4,p.size*0.28,p.size*0.5,0,0,Math.PI*2); ctx.fill(); }
+    ctx.fillStyle='#e4c079'; ctx.beginPath(); ctx.arc(0,0,p.size*0.18,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+  function drawPollen(p){
+    ctx.save(); ctx.globalAlpha=p.opacity; ctx.fillStyle='#e4c079';
+    ctx.shadowColor='rgba(228,192,121,.8)'; ctx.shadowBlur=6;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); ctx.restore();
+  }
+  function tick(){
+    requestAnimationFrame(tick);
+    ctx.clearRect(0,0,W,H);
+    scrollBoost *= 0.92;
+    parts.forEach((p,i)=>{
+      p.sway += p.swaySpeed;
+      p.x += p.vx + Math.sin(p.sway)*0.5;
+      p.y += p.vy + scrollBoost;
+      p.rot += p.vr;
+      if(p.y > H+20 || p.x < -30 || p.x > W+30) parts[i] = spawn(false);
+      if(p.kind==='leaf') drawLeaf(p);
+      else if(p.kind==='blossom') drawBlossom(p);
+      else drawPollen(p);
+    });
+  }
+  if(!REDUCED) tick();
+})();
+
+/* ═══════════ PLOT DATA + AGGREGATOR ═══════════ */
+const plots = [
+  {n:1, c:22.07, view:"Orchard",  status:"available", img:"1416879595882-3373a0480b5b"},
+  {n:2, c:22.12, view:"Corner",   status:"sold",      img:"1523906834658-6e24ef2386f9"},
+  {n:3, c:24.30, view:"Nilgiris", status:"available", img:"1501785888041-af3ef285b470"},
+  {n:4, c:25.00, view:"Nilgiris", status:"reserved",  img:"1501785888041-af3ef285b470"},
+  {n:5, c:23.75, view:"Orchard",  status:"available", img:"1523348837708-15d4a09cfac2"},
+  {n:6, c:24.80, view:"Orchard",  status:"sold",      img:"1444858291040-58f756a3bdd6"},
+  {n:7, c:21.20, view:"Orchard",  status:"available", img:"1466692476868-aef1dfb1e735"},
+  {n:8, c:24.80, view:"Orchard",  status:"available", img:"1523348837708-15d4a09cfac2"},
+  {n:9, c:24.04, view:"Orchard",  status:"reserved",  img:"1444858291040-58f756a3bdd6"},
+  {n:10,c:24.36, view:"Corner",   status:"available", img:"1416879595882-3373a0480b5b"},
+  {n:11,c:21.20, view:"Corner",   status:"available", img:"1500382017468-9049fed747ef"},
+  {n:12,c:24.09, view:"Orchard",  status:"sold",      img:"1523348837708-15d4a09cfac2"},
+  {n:13,c:25.09, view:"Orchard",  status:"available", img:"1466692476868-aef1dfb1e735"},
+  {n:14,c:25.06, view:"Orchard",  status:"reserved",  img:"1523348837708-15d4a09cfac2"},
+  {n:15,c:25.00, view:"Orchard",  status:"available", img:"1444858291040-58f756a3bdd6"},
+  {n:16,c:25.00, view:"Orchard",  status:"available", img:"1416879595882-3373a0480b5b"},
+  {n:17,c:31.18, view:"Nilgiris", status:"available", img:"1501785888041-af3ef285b470"},
+  {n:18,c:19.22, view:"Orchard",  status:"sold",      img:"1523348837708-15d4a09cfac2"},
+  {n:19,c:29.76, view:"Nilgiris", status:"available", img:"1501785888041-af3ef285b470"},
+  {n:20,c:26.79, view:"Corner",   status:"reserved",  img:"1416879595882-3373a0480b5b"},
+  {n:21,c:29.00, view:"Swale",    status:"available", img:"1500382017468-9049fed747ef"},
+  {n:22,c:26.75, view:"Swale",    status:"available", img:"1500382017468-9049fed747ef"},
+  {n:23,c:30.56, view:"Swale",    status:"available", img:"1444858291040-58f756a3bdd6"},
+  {n:24,c:30.48, view:"Swale",    status:"sold",      img:"1466692476868-aef1dfb1e735"},
+  {n:25,c:37.35, view:"Swale",    status:"reserved",  img:"1416879595882-3373a0480b5b", show:true}
+];
+const PRICE_PER_CENT = 185000; // ₹ illustrative
+const inr = v => '₹' + (v>=10000000 ? (v/10000000).toFixed(2)+' Cr' : (v/100000).toFixed(1)+' L');
+const price = p => Math.round(p.c*PRICE_PER_CENT);
+const imgUrl = (id,w=700)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+const sizeClass = c => c<25?'s':(c<30?'m':'l');
+const statusLabel = {available:"Available", reserved:"Reserved", sold:"Sold"};
+const viewFeatures = {Nilgiris:['Nilgiris ridge view','North-facing','Elevated'],Swale:['Swale frontage','Seasonal water','Lower grove'],Orchard:['Mature mango canopy','Central grove','Shaded'],Corner:['Corner parcel','Two-side access','Extra frontage']};
+const favs = new Set();
+
+const grid = document.getElementById('aggGrid');
+const empty = document.getElementById('aggEmpty');
+const shownEl = document.getElementById('aggShown');
+const avgEl = document.getElementById('aggAvg');
+const filters = { status:'all', view:'all', size:'all', q:'' };
+let sortMode = 'num', viewMode = 'grid';
+
+function cardHTML(p){
+  const feats = (viewFeatures[p.view]||[]).slice(0,2);
+  const disabled = p.status==='sold';
+  return `<article class="pcard ${viewMode==='list'?'list-mode':''}" data-n="${p.n}"
+    data-status="${p.status}" data-view="${p.view}" data-size="${sizeClass(p.c)}"
+    data-search="plot ${p.n} ${p.view.toLowerCase()} ${p.c} cents ${p.status}">
+    <div class="pc-img">
+      <img src="${imgUrl(p.img,700)}" alt="Plot ${p.n} — ${p.view} view" loading="lazy">
+      <span class="pc-status ${p.status}">${statusLabel[p.status]}</span>
+      <div class="pc-fav ${favs.has(p.n)?'on':''}" data-fav="${p.n}" role="button" aria-label="Save plot ${p.n}">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.3 2 5 5.2 5c1.9 0 3.2 1 3.8 2.2C9.6 6 10.9 5 12.8 5 16 5 17.6 8.3 16 11.7 13.5 16.4 12 21 12 21z"/></svg>
+      </div>
+    </div>
+    <div class="pc-body">
+      <div class="pc-head">
+        <div class="pc-num">Plot ${String(p.n).padStart(2,'0')}${p.show?' ★':''}</div>
+        <div class="pc-price">${inr(price(p))}</div>
+      </div>
+      <div class="pc-view">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        ${p.view} view${p.show?' · show home':''}
+      </div>
+      <div class="pc-specs">
+        <div><div class="sl">Size</div><div class="sv">${p.c.toFixed(2)} ¢</div></div>
+        <div><div class="sl">Area</div><div class="sv">${Math.round(p.c*435.6).toLocaleString()} ft²</div></div>
+        <div><div class="sl">Rate</div><div class="sv">${inr(PRICE_PER_CENT)}/¢</div></div>
+      </div>
+      <div class="pc-actions">
+        <button class="details" data-details="${p.n}">Details</button>
+        <button class="enquire" data-enquire="${p.n}" ${disabled?'disabled':''}>${disabled?'Sold out':'Enquire'}</button>
+      </div>
+    </div>
+  </article>`;
+}
+
+function renderGrid(){
+  let list = plots.filter(p=>{
+    return (filters.status==='all'||p.status===filters.status)
+      && (filters.view==='all'||p.view===filters.view)
+      && (filters.size==='all'||sizeClass(p.c)===filters.size)
+      && (!filters.q || (`plot ${p.n} ${p.view.toLowerCase()} ${p.c} cents ${p.status}`).includes(filters.q));
+  });
+  const sorters = {
+    num:(a,b)=>a.n-b.n,
+    'price-asc':(a,b)=>price(a)-price(b),
+    'price-desc':(a,b)=>price(b)-price(a),
+    'size-desc':(a,b)=>b.c-a.c,
+    avail:(a,b)=>(a.status==='available'?0:1)-(b.status==='available'?0:1)||a.n-b.n
+  };
+  list.sort(sorters[sortMode]);
+  grid.className = 'agg-grid'+(viewMode==='list'?' list-mode':'');
+  grid.innerHTML = list.map(cardHTML).join('');
+  shownEl.textContent = list.length;
+  const avail = list.filter(p=>p.status!=='sold');
+  avgEl.textContent = avail.length ? inr(Math.round(avail.reduce((s,p)=>s+price(p),0)/avail.length)) : '₹—';
+  empty.style.display = list.length ? 'none':'block';
+  grid.style.display = list.length ? '' : 'none';
+  wireCards();
+}
+function wireCards(){
+  grid.querySelectorAll('[data-details]').forEach(b=> b.addEventListener('click', e=>{ e.stopPropagation(); openPlot(+b.dataset.details); }));
+  grid.querySelectorAll('[data-enquire]').forEach(b=> b.addEventListener('click', e=>{ e.stopPropagation(); if(!b.disabled) openPlot(+b.dataset.enquire); }));
+  grid.querySelectorAll('[data-fav]').forEach(b=> b.addEventListener('click', e=>{ e.stopPropagation(); const n=+b.dataset.fav; favs.has(n)?favs.delete(n):favs.add(n); b.classList.toggle('on'); }));
+  grid.querySelectorAll('.pcard').forEach(c=> c.addEventListener('click', ()=> openPlot(+c.dataset.n)));
+}
+
+/* filter chips */
+document.querySelectorAll('.agg-filters .filter-row').forEach(row=>{
+  const group = row.dataset.group;
+  row.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      row.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active'); filters[group]=chip.dataset.val; renderGrid();
+    });
+  });
+});
+document.getElementById('aggSearch').addEventListener('input', e=>{ filters.q=e.target.value.trim().toLowerCase(); renderGrid(); });
+document.getElementById('aggSort').addEventListener('change', e=>{ sortMode=e.target.value; renderGrid(); });
+
+/* view toggle */
+const vGrid=document.getElementById('viewGrid'), vList=document.getElementById('viewList'), vMap=document.getElementById('viewMap');
+const aggMap=document.getElementById('aggMap');
+function setView(mode){
+  viewMode=mode;
+  [vGrid,vList,vMap].forEach(b=>b.classList.remove('active'));
+  if(mode==='map'){ vMap.classList.add('active'); aggMap.classList.add('show'); grid.classList.add('hide'); empty.style.display='none'; }
+  else { (mode==='grid'?vGrid:vList).classList.add('active'); aggMap.classList.remove('show'); grid.classList.remove('hide'); renderGrid(); }
+}
+vGrid.addEventListener('click',()=>setView('grid'));
+vList.addEventListener('click',()=>setView('list'));
+vMap.addEventListener('click',()=>setView('map'));
+renderGrid();
+buildAerial('aggAerialSvg', openPlot);
+
+/* modal */
+const pmodal=document.getElementById('pmodal'), sheet=document.getElementById('sheet');
+function openPlot(n){
+  const p = plots.find(x=>x.n===n); if(!p) return;
+  const disabled = p.status==='sold';
+  const feats = viewFeatures[p.view]||[];
+  sheet.innerHTML = `
+    <div class="sheet-img">
+      <img src="${imgUrl(p.img,1100)}" alt="Plot ${p.n}">
+      <button class="sheet-close" data-close aria-label="Close">×</button>
+      <span class="pc-status ${p.status}" style="position:absolute;left:16px;bottom:16px;">${statusLabel[p.status]}</span>
+    </div>
+    <div class="sheet-body">
+      <div class="s-num">Plot ${String(p.n).padStart(2,'0')}${p.show?' — show home & pavilion':''}</div>
+      <div class="s-loc">Mango Meadows · Peelamadu, Coimbatore · ${p.view} view</div>
+      <div class="sheet-grid">
+        <div><div class="l">Price</div><div class="v gold">${inr(price(p))}</div></div>
+        <div><div class="l">Size</div><div class="v">${p.c.toFixed(2)} cents</div></div>
+        <div><div class="l">Area</div><div class="v">${Math.round(p.c*435.6).toLocaleString()} ft²</div></div>
+        <div><div class="l">Rate</div><div class="v">${inr(PRICE_PER_CENT)}/¢</div></div>
+      </div>
+      <div class="sheet-feats">${feats.map(f=>`<span>${f}</span>`).join('')}<span>Registered title</span><span>Managed care</span></div>
+      <div class="sheet-actions">
+        ${disabled
+          ? '<a class="btn btn-ghost" style="border-color:var(--dark-earth);color:var(--dark-earth);" data-close>This plot is sold — view others</a>'
+          : '<a class="btn btn-primary" data-visit>Hold this plot for a visit</a><a class="btn btn-ghost" style="border-color:var(--dark-earth);color:var(--dark-earth);" data-close>Keep browsing</a>'}
+      </div>
+    </div>`;
+  pmodal.classList.add('open');
+  if(lenis) lenis.stop();
+  document.body.style.overflow='hidden';
+  sheet.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closePlot));
+  const visit = sheet.querySelector('[data-visit]');
+  if(visit) visit.addEventListener('click',()=>{ closePlot(); go('journal'); });
+}
+function closePlot(){ pmodal.classList.remove('open'); if(lenis) lenis.start(); document.body.style.overflow=''; }
+pmodal.querySelector('.scrim').addEventListener('click',closePlot);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&pmodal.classList.contains('open')) closePlot(); });
+
+/* ═══════════ ROUTER / TABS ═══════════ */
+const nav = document.getElementById('nav');
+function go(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const page = document.getElementById('page-'+id);
+  if(page) page.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.go===id));
+  document.getElementById('tabs').classList.remove('open');
+  if(lenis) lenis.scrollTo(0,{immediate:true}); else window.scrollTo(0,0);
+  history.replaceState(null,'','#'+id);
+  nav.classList.toggle('hero-mode', id==='home');
+  // re-register reveals for the shown page + refresh triggers
+  if(page) registerReveals(page);
+  if(hasGSAP) setTimeout(()=>ScrollTrigger.refresh(), 60);
+  if(window.__orchardRefresh) window.__orchardRefresh();
+}
+document.querySelectorAll('[data-go]').forEach(el=> el.addEventListener('click',()=>go(el.dataset.go)));
+document.getElementById('menuBtn').addEventListener('click',()=> document.getElementById('tabs').classList.toggle('open'));
+
+/* nav bg on scroll */
+function onNavScroll(y){
+  nav.classList.toggle('scrolled', y > 40);
+  if(document.getElementById('page-home').classList.contains('active')){
+    nav.classList.toggle('hero-mode', y < window.innerHeight*0.6);
+  }
+}
+if(lenis) lenis.on('scroll', ({scroll})=> onNavScroll(scroll));
+window.addEventListener('scroll', ()=> onNavScroll(window.scrollY), {passive:true});
+
+/* init from hash */
+const start = (location.hash||'').replace('#','');
+if(start && document.getElementById('page-'+start)) go(start);
+else nav.classList.add('hero-mode');
+
+// keep ScrollTrigger honest after fonts/images
+window.addEventListener('load', ()=>{ if(hasGSAP) ScrollTrigger.refresh(); });
+</script>
+</body>
+</html>
