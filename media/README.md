@@ -3,8 +3,8 @@
 Drop your orchard drone clip here to get a **true autoplay cinematic hero**:
 
 ```
-the-farm-stories/media/hero.mp4      (H.264 / MP4 — required)
-the-farm-stories/media/hero.webm     (VP9 / WebM — optional, smaller)
+media/hero.mp4      (H.264 / MP4 — required)
+media/hero.webm     (VP9 / WebM — optional, smaller)
 ```
 
 The hero `<video>` in `index.html` already lists these as its first sources, so

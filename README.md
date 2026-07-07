@@ -6,7 +6,7 @@ An ultra-premium, single-file storytelling website for **Mango Meadows, Peelamad
 ## What's here
 
 ```
-the-farm-stories/
+./
 ├── index.html      # the entire site (HTML + CSS + JS inline)
 ├── vendor/         # self-hosted libraries (no CDN dependency)
 │   ├── gsap.min.js
@@ -49,7 +49,7 @@ degrade gracefully if unavailable.
 It's a static site — open `index.html` in a browser, or serve the folder:
 
 ```bash
-cd the-farm-stories && python3 -m http.server 8000
+python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
@@ -59,4 +59,4 @@ This is a plain static folder with **no build step and no framework/deploy
 config** (no `package.json`, `vercel.json`, etc.), so adding it to the
 repository does not change how any existing Vercel/host project builds or
 deploys. To publish just this experience, point a static host at the
-`the-farm-stories/` directory.
+repository root (or its own subfolder).
